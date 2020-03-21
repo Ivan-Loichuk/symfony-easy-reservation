@@ -36,14 +36,13 @@ class AppUserRepository extends ServiceEntityRepository implements PasswordUpgra
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return AppUser[] Returns an array of AppUser objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return AppUser[] Returns an array of AppUser objects
+     */
+    public function findByEmail($value)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+            ->andWhere('u.email = :val')
             ->setParameter('val', $value)
             ->orderBy('u.id', 'ASC')
             ->setMaxResults(10)
@@ -51,17 +50,34 @@ class AppUserRepository extends ServiceEntityRepository implements PasswordUpgra
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?AppUser
+    public function findOneByEmail($value): ?AppUser
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
+            ->andWhere('u.email = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
+    public function transform(AppUser $user)
+    {
+        return [
+            'id'    => (int) $user->getId(),
+            'email' => (string) $user->getEmail(),
+        ];
+    }
+
+    public function transformAll()
+    {
+        $users = $this->findAll();
+        $usersArray = [];
+
+        foreach ($users as $user) {
+            $usersArray[] = $this->transform($user);
+        }
+
+        return $usersArray;
+    }
 }
