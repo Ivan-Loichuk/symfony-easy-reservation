@@ -16,12 +16,16 @@ security:
             security: false
         main:
             anonymous: lazy
+            json_login:
+                check_path: api_login
+                username_path: email
+                password_path: password
             form_login:
                 login_path: app_login
                 check_path: app_login
             logout:
                 path:   app_logout
-                target: app_logout
+                target: app_login
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator

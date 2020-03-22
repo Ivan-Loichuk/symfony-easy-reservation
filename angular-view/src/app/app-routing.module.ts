@@ -10,7 +10,7 @@ const routes: Routes = [
     component: AdminPanelComponent,
   },
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
   }
 ];

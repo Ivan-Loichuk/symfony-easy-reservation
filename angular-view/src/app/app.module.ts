@@ -8,6 +8,9 @@ import { PanelHeaderComponent } from './panel-header/panel-header.component';
 import { PanelFooterComponent } from './panel-footer/panel-footer.component';
 import {HomeComponent} from './home/home.component';
 import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './security/login/login.component';
+import { RegistrationComponent } from './security/registration/registration.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -15,12 +18,16 @@ import {HttpClientModule} from '@angular/common/http';
     AdminPanelComponent,
     PanelHeaderComponent,
     PanelFooterComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
