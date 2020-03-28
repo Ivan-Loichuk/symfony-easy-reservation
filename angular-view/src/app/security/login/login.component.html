@@ -35,6 +35,11 @@
                                     </fieldset>
                                     <div class="clearfix"></div>
                                 </form>
+
+                                <br>
+                                <div class="alert alert-danger signin_form"  *ngIf="errorMessage">
+                                    <strong translate>{{errorMessage}}</strong>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../services/authentication.service';
 import { first } from 'rxjs/operators';
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,6 @@ export class LoginComponent implements OnInit {
   public registrationForm: FormGroup;
 
   public errorMessage: string;
-  public showErrorMessage = false;
-  public showLoginMessage = false;
-  public spinnerInShow = false;
-  public spinnerUpShow = false;
 
   constructor(
       private route: Router,
@@ -39,18 +36,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSignIn(credentials) {
-    console.log(credentials);
-
     this.authenticationService.login(credentials.email, credentials.password)
         .pipe(first())
-        .subscribe(
-            data => {
-              console.log('success');
-              // this.router.navigate([this.returnUrl]);
-            },
-            error => {
-              console.log(error);
-            });
+        .subscribe((data : any) => {
+            localStorage.setItem('userToken', data.authdata);
+            this.route.navigate(['/panel', data.user]);
+        }, (err : HttpErrorResponse) => {
+                this.errorMessage = err.error.error;
+        });
   }
 
   onSignUp(credentials) {

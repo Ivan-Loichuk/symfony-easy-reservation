@@ -25,7 +25,6 @@ export class AuthenticationService {
         .pipe(map(user => {
           // login successful if there's a user in the response
           if (user) {
-            console.log(user);
             // store user details and basic auth credentials in local storage
             // to keep user logged in between page refreshes
             user.authdata = window.btoa(username + ':' + password);
@@ -36,4 +35,12 @@ export class AuthenticationService {
         }));
   }
 
+  isAuthenticated() {
+      return localStorage.getItem("currentUser") != null;
+  }
+
+  logout() {
+      localStorage.removeItem('userToken');
+      localStorage.removeItem('currentUser');
+  }
 }
