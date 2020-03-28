@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthenticationService} from "../../services/authentication.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../../services/authentication.service';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -14,24 +14,24 @@ export class LoginComponent implements OnInit {
   public registrationForm: FormGroup;
 
   public errorMessage: string;
-  public showErrorMessage: boolean = false;
-  public showLoginMessage: boolean = false;
+  public showErrorMessage = false;
+  public showLoginMessage = false;
   public spinnerInShow = false;
   public spinnerUpShow = false;
 
   constructor(
       private route: Router,
-      private fb:FormBuilder,
+      private fb: FormBuilder,
       private authenticationService: AuthenticationService
   ) {
 
     this.loginForm = fb.group({
-      email: ["", Validators.required],
-      password: ["", Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
     });
 
     this.registrationForm = fb.group({
-      email: ["", Validators.required],
+      email: ['', Validators.required],
     });
   }
 
@@ -45,8 +45,8 @@ export class LoginComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-              console.log("success");
-              //this.router.navigate([this.returnUrl]);
+              console.log('success');
+              // this.router.navigate([this.returnUrl]);
             },
             error => {
               console.log(error);
