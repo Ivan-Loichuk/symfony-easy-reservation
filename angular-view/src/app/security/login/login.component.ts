@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   public registrationForm: FormGroup;
 
   public errorMessage: string;
+  public registerSuccessMsg: string;
 
   constructor(
       private route: Router,
@@ -42,12 +43,27 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('userToken', data.authdata);
             this.route.navigate(['/panel', data.user]);
         }, (err : HttpErrorResponse) => {
-                this.errorMessage = err.error.error;
+            this.errorMessage = err.error.error;
+            setTimeout(function() {
+                this.errorMessage = false;
+            }.bind(this), 5000);
         });
   }
 
   onSignUp(credentials) {
-    console.log(credentials);
+    this.authenticationService.register({'email': credentials.email})
+        .pipe(first())
+        .subscribe((data : any) => {
+           this.registerSuccessMsg = data.success;
+           setTimeout(function() {
+               this.registerSuccessMsg = false;
+           }.bind(this), 5000);
+        }, (err : HttpErrorResponse) => {
+           this.errorMessage = err.error.error;
+            setTimeout(function() {
+                this.errorMessage = false;
+            }.bind(this), 5000);
+        });
   }
 
 }

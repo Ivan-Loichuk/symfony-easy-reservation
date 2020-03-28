@@ -35,6 +35,10 @@ export class AuthenticationService {
         }));
   }
 
+  register(credentials: any): Observable<UserInterface> {
+      return this.http.post<any>(environment.apiUrl + '/api/signup', credentials);
+  }
+
   isAuthenticated() {
       return localStorage.getItem("currentUser") != null;
   }

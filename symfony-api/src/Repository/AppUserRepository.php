@@ -80,4 +80,17 @@ class AppUserRepository extends ServiceEntityRepository implements PasswordUpgra
 
         return $usersArray;
     }
+
+    public function randomPassword($length) {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $alphaLength = strlen($alphabet) - 1;
+
+        $password = [];
+        for ($i = 0; $i < $length; $i++) {
+            $n = rand(0, $alphaLength);
+            $password[] = $alphabet[$n];
+        }
+
+        return implode($password);
+    }
 }

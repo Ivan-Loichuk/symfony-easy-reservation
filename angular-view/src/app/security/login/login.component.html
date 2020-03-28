@@ -37,7 +37,7 @@
                                 </form>
 
                                 <br>
-                                <div class="alert alert-danger signin_form"  *ngIf="errorMessage">
+                                <div class="alert alert-danger"  *ngIf="errorMessage">
                                     <strong translate>{{errorMessage}}</strong>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                     <div class="tab-pane fade show text-align form-new" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row register-form">
                             <div class="col-md-12">
-                                <form [formGroup]="registrationForm" (ngSubmit)="onSignIn(registrationForm.value)">
+                                <form [formGroup]="registrationForm" (ngSubmit)="onSignUp(registrationForm.value)">
                                     <fieldset class="clearfix">
                                         <p >
                                             <span class="fa fa-user"></span>
@@ -57,12 +57,19 @@
                                                 <a class="small-text" href="#">Already have account?</a>
                                             </span>
                                             <span style="width:50%; text-align:right;  display: inline-block;">
-                                                <button type="submit" class="btn btn-danger btn-signin  button" translate>Sign In</button>
+                                                <button type="submit" class="btn btn-danger btn-signin  button" translate>Sign Up</button>
                                             </span>
                                         </div>
                                     </fieldset>
-                                <div class="clearfix"></div>
-                            </form>
+                                    <div class="clearfix"></div>
+                                </form>
+                                <br>
+                                <div class="alert alert-danger"  *ngIf="errorMessage">
+                                    <strong translate>{{errorMessage}}</strong>
+                                </div>
+                                <div class="alert alert-success"  *ngIf="registerSuccessMsg">
+                                    <strong translate>{{registerSuccessMsg}}</strong>
+                                </div>
                             </div>
                         </div>
                     </div>

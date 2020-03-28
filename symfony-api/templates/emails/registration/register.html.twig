@@ -3,7 +3,13 @@
 Hi {{ email }}! You're successfully registered.
 
 {# example, assuming you have a route named "login" #}
-To login, go to: <a href="{{ url('app_login') }}">LOGIN PAGE</a>.
+To login, go to: <a href="{{ login_url }}">LOGIN PAGE</a>.
+
+<p>Your login details:</p>
+<ul>
+   <li>Login:  {{ email }}</li>
+   <li>Password: {{ params.password }}</li>
+</ul>
 
 Thanks!
 
